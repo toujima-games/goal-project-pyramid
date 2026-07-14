@@ -1,0 +1,535 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>目標企画ピラミッド</title>
+<style>
+  :root {
+    --bg: #f5f2ec;
+    --card: #fffdf8;
+    --ink: #23201c;
+    --muted: #70685f;
+    --line: #ddd4c8;
+    --accent: #4e6f73;
+    --accent2: #9a6a49;
+    --soft: #eee7dd;
+    --dark: #292520;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Yu Gothic", sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.65;
+  }
+  main {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 20px 14px 56px;
+  }
+  header, section {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    box-shadow: 0 2px 10px rgba(0,0,0,.035);
+  }
+  header {
+    padding: 18px;
+    margin-bottom: 14px;
+  }
+  h1 {
+    margin: 0;
+    font-size: 1.55rem;
+    letter-spacing: .02em;
+  }
+  section {
+    padding: 16px;
+    margin: 14px 0;
+  }
+  h2 {
+    margin: 0 0 10px;
+    font-size: 1.08rem;
+    border-left: 5px solid var(--accent);
+    padding-left: 10px;
+  }
+  label {
+    display: block;
+    font-weight: 700;
+    margin: 12px 0 5px;
+  }
+  .small {
+    font-weight: 500;
+    color: var(--muted);
+    font-size: .84rem;
+  }
+  textarea, input {
+    width: 100%;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 10px 11px;
+    font: inherit;
+    background: #fff;
+    color: var(--ink);
+  }
+  textarea {
+    min-height: 76px;
+    resize: vertical;
+  }
+  input { min-height: 44px; }
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  @media (min-width: 760px) {
+    .grid.two { grid-template-columns: 1fr 1fr; }
+  }
+  .pyramid {
+    display: grid;
+    gap: 8px;
+    margin: 10px 0 2px;
+  }
+  .level {
+    border: 1px solid var(--line);
+    background: #fff;
+    border-radius: 14px;
+    padding: 10px 12px;
+  }
+  .level strong {
+    display: inline-block;
+    min-width: 6em;
+  }
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 14px;
+  }
+  button {
+    border: 0;
+    border-radius: 999px;
+    padding: 10px 14px;
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+    background: var(--accent);
+    color: #fff;
+  }
+  button.secondary { background: var(--accent2); }
+  button.ghost {
+    background: var(--soft);
+    color: var(--ink);
+  }
+  pre {
+    white-space: pre-wrap;
+    word-break: break-word;
+    background: var(--dark);
+    color: #fff7ec;
+    padding: 14px;
+    border-radius: 14px;
+    min-height: 180px;
+    font-size: .92rem;
+  }
+  details {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 10px 12px;
+    margin-top: 10px;
+  }
+  summary {
+    cursor: pointer;
+    font-weight: 700;
+  }
+  .badge {
+    display: inline-block;
+    background: var(--soft);
+    border-radius: 999px;
+    padding: 2px 9px;
+    color: var(--muted);
+    font-size: .8rem;
+    margin-left: 4px;
+  }
+  @media print {
+    body { background: #fff; }
+    main { max-width: none; padding: 0; }
+    button, .actions, details { display: none !important; }
+    header, section { box-shadow: none; border-color: #ccc; break-inside: avoid; }
+    pre { background: #fff; color: #000; border: 1px solid #ccc; }
+  }
+</style>
+</head>
+<body>
+<main>
+<header>
+  <h1>目標企画ピラミッド</h1>
+</header>
+
+<section>
+  <h2>0. 企画名</h2>
+  <label>企画名</label>
+  <input id="projectName">
+</section>
+
+<section>
+  <h2>1. 目標ピラミッド</h2>
+
+  <div class="pyramid">
+    <div class="level"><strong>第1階層</strong> ビジョン・ミッション <span class="badge">Why</span></div>
+    <textarea id="vision"></textarea>
+
+    <div class="level"><strong>第2階層</strong> 中長期の方向性 <span class="badge">What</span></div>
+    <textarea id="strategy"></textarea>
+
+    <div class="level"><strong>第3階層</strong> 今の期間のテーマ <span class="badge">Focus</span></div>
+    <textarea id="phase"></textarea>
+
+    <div class="level"><strong>第4階層</strong> 今回の行動目標 <span class="badge">Action</span></div>
+    <textarea id="actionGoal"></textarea>
+  </div>
+</section>
+
+<section>
+  <h2>2. 今回の企画カード</h2>
+
+  <div class="grid two">
+    <div>
+      <label>誰に向ける？</label>
+      <input id="audience">
+    </div>
+    <div>
+      <label>どんな価値を渡す？</label>
+      <input id="value">
+    </div>
+  </div>
+
+  <label>今回扱う問い・テーマ</label>
+  <input id="question">
+
+  <label>見る人・読む人・使う人に起こしたい変化</label>
+  <input id="change">
+
+  <div class="grid two">
+    <div>
+      <label>実際にやる行動 <span class="small">達成判定できる形</span></label>
+      <input id="action">
+    </div>
+    <div>
+      <label>成功条件</label>
+      <input id="success">
+    </div>
+  </div>
+
+  <label>失敗しても残る見どころ・学び</label>
+  <input id="fallback">
+
+  <div class="grid two">
+    <div>
+      <label>一言コピー・見出し</label>
+      <input id="catch">
+    </div>
+    <div>
+      <label>タイトル案</label>
+      <input id="title">
+    </div>
+  </div>
+
+  <label>次の一手</label>
+  <input id="nextStep">
+</section>
+
+<section>
+  <h2>3. 出力</h2>
+  <div class="actions">
+    <button onclick="buildOutput()">出力を作る</button>
+    <button class="secondary" onclick="copyOutput()">コピー</button>
+    <button class="ghost" onclick="downloadMarkdown()">Markdown保存</button>
+    <button class="ghost" onclick="downloadJson()">JSON保存</button>
+    <button class="ghost" onclick="print()">印刷</button>
+    <button class="ghost" onclick="clearAll()">全部消す</button>
+  </div>
+  <pre id="output">ここに出力が表示されます。</pre>
+
+  <details>
+    <summary>Markdownを読み込む</summary>
+    <p class="small">このツールから保存したMarkdown（.md）を選ぶか、内容を貼り付けてください。</p>
+    <input id="markdownFile" type="file" accept=".md,text/markdown,text/plain" onchange="readMarkdownFile(event)">
+    <textarea id="markdownImport" placeholder="Markdownの内容をここに貼り付け"></textarea>
+    <div class="actions">
+      <button class="secondary" onclick="importMarkdown()">読み込む</button>
+    </div>
+  </details>
+
+  <details>
+    <summary>JSONを読み込む</summary>
+    <textarea id="jsonImport"></textarea>
+    <div class="actions">
+      <button class="secondary" onclick="importJson()">読み込む</button>
+    </div>
+  </details>
+</section>
+</main>
+
+<script>
+const ids = [
+  "projectName",
+  "vision","strategy","phase","actionGoal",
+  "audience","value","question","change","action","success","fallback",
+  "catch","title","nextStep"
+];
+
+const storagePrefix = "goal_planning_pyramid_minimal_";
+
+function loadSaved() {
+  ids.forEach(id => {
+    const v = localStorage.getItem(storagePrefix + id);
+    if (v !== null) document.getElementById(id).value = v;
+  });
+}
+
+function saveAll() {
+  ids.forEach(id => localStorage.setItem(storagePrefix + id, document.getElementById(id).value));
+}
+
+function val(id) {
+  return document.getElementById(id).value.trim() || "未記入";
+}
+
+function dataObject() {
+  const obj = {};
+  ids.forEach(id => obj[id] = document.getElementById(id).value.trim());
+  obj.generatedAt = new Date().toISOString();
+  return obj;
+}
+
+function buildOutput() {
+  saveAll();
+  const text = `# 目標企画ピラミッド
+
+## 企画情報
+- 企画名：${val("projectName")}
+
+## 目標ピラミッド
+- 第1階層｜ビジョン・ミッション：${val("vision")}
+- 第2階層｜中長期の方向性：${val("strategy")}
+- 第3階層｜今の期間のテーマ：${val("phase")}
+- 第4階層｜今回の行動目標：${val("actionGoal")}
+
+## 今回の企画カード
+- 誰に向ける？：${val("audience")}
+- 渡す価値：${val("value")}
+- 扱う問い・テーマ：${val("question")}
+- 起こしたい変化：${val("change")}
+- 実際にやる行動：${val("action")}
+- 成功条件：${val("success")}
+- 失敗しても残る見どころ・学び：${val("fallback")}
+
+## 使う言葉
+- 一言コピー・見出し：${val("catch")}
+- タイトル案：${val("title")}
+- 次の一手：${val("nextStep")}
+`;
+  document.getElementById("output").textContent = text;
+  return text;
+}
+
+async function copyOutput() {
+  const text = buildOutput();
+
+  // 1. Modern Clipboard API
+  if (navigator.clipboard && window.isSecureContext) {
+    try {
+      await navigator.clipboard.writeText(text);
+      alert("コピーしました");
+      return;
+    } catch (e) {
+      // Continue to fallback
+    }
+  }
+
+  // 2. Fallback for local HTML / non-secure contexts
+  const textarea = document.createElement("textarea");
+  textarea.value = text;
+  textarea.setAttribute("readonly", "");
+  textarea.style.position = "fixed";
+  textarea.style.top = "0";
+  textarea.style.left = "0";
+  textarea.style.width = "1px";
+  textarea.style.height = "1px";
+  textarea.style.opacity = "0";
+  document.body.appendChild(textarea);
+  textarea.focus();
+  textarea.select();
+
+  try {
+    const successful = document.execCommand("copy");
+    document.body.removeChild(textarea);
+    if (successful) {
+      alert("コピーしました");
+      return;
+    }
+  } catch (e) {
+    document.body.removeChild(textarea);
+  }
+
+  // 3. Last resort: select output text manually
+  const output = document.getElementById("output");
+  const range = document.createRange();
+  range.selectNodeContents(output);
+  const selection = window.getSelection();
+  selection.removeAllRanges();
+  selection.addRange(range);
+  alert("自動コピーできませんでした。出力欄を選択したので、Ctrl+C または長押しコピーをしてください。");
+}
+
+function download(filename, text, type, addBom = false) {
+  const content = addBom ? "\ufeff" + text : text;
+  const blob = new Blob([content], { type });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+}
+
+function safeName() {
+  const base = val("projectName").replace(/[\\/:*?"<>|]/g, "_").slice(0, 40);
+  return base === "未記入" ? "goal_planning_pyramid" : base;
+}
+
+function downloadMarkdown() {
+  const text = buildOutput();
+  download(safeName() + ".md", text, "text/markdown;charset=utf-8", true);
+}
+
+function downloadJson() {
+  saveAll();
+  download(safeName() + ".json", JSON.stringify(dataObject(), null, 2), "application/json;charset=utf-8", true);
+}
+
+const markdownFieldMap = new Map([
+  ["企画名", "projectName"],
+  ["第1階層｜ビジョン・ミッション", "vision"],
+  ["第2階層｜中長期の方向性", "strategy"],
+  ["第3階層｜今の期間のテーマ", "phase"],
+  ["第4階層｜今回の行動目標", "actionGoal"],
+  ["誰に向ける？", "audience"],
+  ["渡す価値", "value"],
+  ["扱う問い・テーマ", "question"],
+  ["起こしたい変化", "change"],
+  ["実際にやる行動", "action"],
+  ["成功条件", "success"],
+  ["失敗しても残る見どころ・学び", "fallback"],
+  ["一言コピー・見出し", "catch"],
+  ["タイトル案", "title"],
+  ["次の一手", "nextStep"]
+]);
+
+function parseMarkdown(text) {
+  const result = {};
+  let currentId = null;
+  const lines = text.replace(/^\uFEFF/, "").replace(/\r\n?/g, "\n").split("\n");
+
+  for (const line of lines) {
+    const fieldMatch = line.match(/^-\s*(.+?)[：:]\s*(.*)$/);
+
+    if (fieldMatch && markdownFieldMap.has(fieldMatch[1].trim())) {
+      currentId = markdownFieldMap.get(fieldMatch[1].trim());
+      result[currentId] = fieldMatch[2];
+      continue;
+    }
+
+    if (/^#{1,6}\s/.test(line)) {
+      currentId = null;
+      continue;
+    }
+
+    if (currentId !== null) {
+      result[currentId] += "\n" + line;
+    }
+  }
+
+  Object.keys(result).forEach(id => {
+    result[id] = result[id].trim();
+    if (result[id] === "未記入") result[id] = "";
+  });
+
+  return result;
+}
+
+function importMarkdown() {
+  const text = document.getElementById("markdownImport").value;
+
+  if (!text.trim()) {
+    alert("Markdownの内容を貼り付けるか、ファイルを選んでください");
+    return;
+  }
+
+  const obj = parseMarkdown(text);
+  const foundIds = ids.filter(id => Object.prototype.hasOwnProperty.call(obj, id));
+
+  if (foundIds.length === 0) {
+    alert("読み込める項目が見つかりませんでした。このツールから保存したMarkdownか確認してください");
+    return;
+  }
+
+  foundIds.forEach(id => {
+    document.getElementById(id).value = obj[id];
+  });
+
+  saveAll();
+  buildOutput();
+  alert("Markdownを読み込みました");
+}
+
+function readMarkdownFile(event) {
+  const file = event.target.files && event.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = () => {
+    document.getElementById("markdownImport").value = String(reader.result || "");
+    importMarkdown();
+  };
+  reader.onerror = () => alert("Markdownファイルを読み込めませんでした");
+  reader.readAsText(file, "UTF-8");
+}
+
+function importJson() {
+  try {
+    const obj = JSON.parse(document.getElementById("jsonImport").value);
+    ids.forEach(id => {
+      if (Object.prototype.hasOwnProperty.call(obj, id)) {
+        document.getElementById(id).value = obj[id];
+      }
+    });
+    saveAll();
+    buildOutput();
+    alert("読み込みました");
+  } catch (e) {
+    alert("JSONの形式を確認してください");
+  }
+}
+
+function clearAll() {
+  if (!confirm("入力内容を全部消しますか？")) return;
+  ids.forEach(id => {
+    document.getElementById(id).value = "";
+    localStorage.removeItem(storagePrefix + id);
+  });
+  document.getElementById("output").textContent = "ここに出力が表示されます。";
+}
+
+document.addEventListener("input", e => {
+  if (e.target && ids.includes(e.target.id)) saveAll();
+});
+
+loadSaved();
+</script>
+</body>
+</html>
